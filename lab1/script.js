@@ -130,6 +130,13 @@ function onPlagueAdd(e) {
   const name = document.getElementById("plague-name");
 
   if (!name.value) return;
+  // validate
+  for (const plag of plagues) {
+    if (plag.toLowerCase() === name.value.toLowerCase()) {
+      alert('Такая болезнь уже существует');
+      return;
+    }
+  }
 
   // get this plague symptomes
   const symptomes = getSelectedOptions(
@@ -175,8 +182,13 @@ function onSymptomeAdd(e) {
 
   const name = document.getElementById("symptome-name");
 
-  if (!name.value) {
-    return;
+  if (!name.value) return;
+  // validate
+  for (const symp of symptomes) {
+    if (symp.toLowerCase() === name.value.toLowerCase()) {
+      alert('Такой симптом уже существует');
+      return;
+    }
   }
 
   // update array
