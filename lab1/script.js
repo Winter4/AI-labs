@@ -67,21 +67,38 @@ function deny(data) {
   }
 }
 
-function checkData(data) {
-  let counter = 0;
-  for (let j1 = 0; j1 < data[0].length; j1++) {
-    for (let j2 = 0; j2 < data[0].length; j2++) {
-      if (j1 == j2) continue;
-      for (let i = 0; i < data.length; i++) {
-        if (data[i][j1] == 1 && data[i][j2] == 0) {
-          counter++;
-          break;
-        }
-      }
+function checkData(table) {
+  // plagues number
+  const plaguesNum = plagues.length;
+
+  const rootContains = (rootIndex, compIndex) => {
+    // in rows
+    for (const k in table) {
+      // root doesn't have this symp & comp has == root isn't containing
+      if (!table[k][rootIndex] && table[k][compIndex]) return false;
     }
-    if (counter != data[0].length - 1) return false;
-    else counter = 0;
+    return true;
   }
+
+  // let's call the plague in the 'i' loop 'root plague'
+  for (let i = 0; i < plaguesNum; i++) {
+    // and 'j' loop contains 'compared plague'
+    for (let j = 0; j < plaguesNum; j++) {
+      /**
+        * the idea of the algorithm is "compared plague shouldn't be contained by root plague" 
+        * 
+        * compared plague is allowed to contain root plague, because in the end
+        * every plague in the pair would be both root & compared
+        * and would be checked in both ways
+      */
+
+      // not comparing the same plague
+      if (i === j) continue;
+
+      if (rootContains(i, j)) return false;
+    }
+  }
+
   return true;
 }
 
