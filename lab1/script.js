@@ -198,7 +198,7 @@ function getTable() {
     html += `<th>${symptomes[i]} <img src='./trash.png' class='clickable' onclick='removeSymptome(${i})'></th>`;
 
     for (let j in match[i]) {
-      html += `<td onclick='toggleMatch(${i}, ${j})'>`;
+      html += `<td class="clickable" onclick='toggleMatch(${i}, ${j})'>`;
       html += match[i][j] ? "+" : "";
       html += "</td>";
     }
