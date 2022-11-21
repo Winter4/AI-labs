@@ -312,10 +312,10 @@ function getTable() {
   for (let i in symptomes) {
     html += "<tr>";
 
-    html += `<th>${symptomes[i]} <img src='./trash.png' class='clickable' onclick='removeSymptome(${i})'></th>`;
+    html += `<th>${symptomes[i]} <img src='./trash.png' onclick='removeSymptome(${i})'></th>`;
 
     for (let j in match[i]) {
-      html += `<td onclick='toggleMatch(${i}, ${j})'>`;
+      html += `<td class='clickable' onclick='toggleMatch(${i}, ${j})'>`;
       html += match[i][j] ? `${coefs[i][j][0]} - ${coefs[i][j][1]}` : "";
       html += "</td>";
     }
