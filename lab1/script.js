@@ -43,19 +43,23 @@ let match = [
   [false, false, false, true],
 ];
 
+function clone(data) {
+  return JSON.parse(JSON.stringify(data));
+}
+
 /**
  *
  * @param {integer} s symptome = row number
  * @param {integer} p plague = column number
  */
 function toggleMatch(s, p) {
-  let newMatch = match.slice();
+  let newMatch = clone(match);
 
   newMatch[s][p] = !newMatch[s][p];
 
   if (deny(newMatch)) return;
-
-  match = newMatch.slice();
+  console.log("after");
+  match = clone(newMatch);
 
   getTable();
 }
@@ -78,19 +82,19 @@ function checkData(table) {
       if (!table[k][rootIndex] && table[k][compIndex]) return false;
     }
     return true;
-  }
+  };
 
   // let's call the plague in the 'i' loop 'root plague'
   for (let i = 0; i < plaguesNum; i++) {
     // and 'j' loop contains 'compared plague'
     for (let j = 0; j < plaguesNum; j++) {
       /**
-        * the idea of the algorithm is "compared plague shouldn't be contained by root plague" 
-        * 
-        * compared plague is allowed to contain root plague, because in the end
-        * every plague in the pair would be both root & compared
-        * and would be checked in both ways
-      */
+       * the idea of the algorithm is "compared plague shouldn't be contained by root plague"
+       *
+       * compared plague is allowed to contain root plague, because in the end
+       * every plague in the pair would be both root & compared
+       * and would be checked in both ways
+       */
 
       // not comparing the same plague
       if (i === j) continue;
@@ -133,7 +137,7 @@ function onPlagueAdd(e) {
   // validate
   for (const plag of plagues) {
     if (plag.toLowerCase() === name.value.toLowerCase()) {
-      alert('Такая болезнь уже существует');
+      alert("Такая болезнь уже существует");
       return;
     }
   }
@@ -143,7 +147,7 @@ function onPlagueAdd(e) {
     document.getElementById("plague-select")
   );
   // tmp table
-  const newMatch = match.slice();
+  const newMatch = clone(match);
   // add new plague to potential match
   for (let i in newMatch) {
     newMatch[i].push(symptomes[i]);
@@ -157,20 +161,20 @@ function onPlagueAdd(e) {
   plagues.push(name.value);
 
   // add symptomes to match table
-  match = newMatch.slice();
+  match = clone(newMatch);
 
   getTable();
 }
 
 function removeSymptome(id) {
-  let tmp = match.slice();
+  let tmp = clone(match);
 
   // remove symptome from the match array
   tmp.splice(id, 1);
 
   if (deny(tmp)) return;
 
-  match = tmp.slice();
+  match = clone(tmp);
   symptomes.splice(id, 1);
 
   getTable();
@@ -186,7 +190,7 @@ function onSymptomeAdd(e) {
   // validate
   for (const symp of symptomes) {
     if (symp.toLowerCase() === name.value.toLowerCase()) {
-      alert('Такой симптом уже существует');
+      alert("Такой симптом уже существует");
       return;
     }
   }
