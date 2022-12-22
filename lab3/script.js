@@ -177,6 +177,11 @@ function onAddTarget() {
   inputs.push(document.getElementById("target-input-2"));
   const target = document.getElementById("target-input-name").value;
 
+  if (!inputs[0].value || !inputs[1].value || !target) {
+    alert("Пустой инпут запрещён");
+    return;
+  }
+
   // check descriptions collissions
   for (const i of inputs) {
     if (!i.disabled && descriptionsHas(i.value)) {
