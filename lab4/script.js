@@ -13,8 +13,7 @@ function idval(id) {
 }
 
 function f(x) {
-  //return 20 * Math.cos(x / 22) - 150;
-  return (x - 10) * (x - 10) + 20;
+  return 20 * Math.cos(x / 22) - 150;
 }
 
 function addChromosome(chr) {
@@ -37,7 +36,7 @@ function generateTable() {
   const table = idel("chromosomes-table");
   let html = "";
 
-  html += `<thead><th>Хромосома</th> <th>x</th> <th>f(x)</th></thead>`;
+  html += `<thead class="table-dark"><th>Хромосома</th> <th>x</th> <th>f(x)</th></thead>`;
 
   html += "<tbody>";
   for (let i = 0; i < chromosomes.length; i++) {
